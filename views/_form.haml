@@ -1,0 +1,55 @@
+%header
+  %h2 475 Advanced Topics in Software Engineering
+  %p Please provide your feedback on the lecture and tutorial
+%section
+  %ul
+    %li
+      %label(for = 'name') Name:
+      %input#name.element.text.required(name = 'name' type = 'text')
+      %small Your first and last name(s)
+    %li
+      %label(for = 'username') Username:
+      %input#username.element.text.required(name = 'username' type = 'text')
+      %small Your CATE username
+    %li
+      %label(for = 'class_name') Class:
+      %input#class_name.element.text.required(name = 'class_name' type = 'text')
+      %small The class code or name
+    %li
+      %label(for = 'lecture_title') Lecture title:
+      %input#lecture_title.element.text.required(name = 'lecture_title' type = 'text')
+      %small The official lecture title
+    %li.section_break
+    %li
+      %label(for = 'key_points') The three key points from the lecture were:
+      %textarea#key_points.element.textarea(name = 'key_points')~ "*\n*\n*"
+      %small What were key points made in the lecture?
+    %li
+      %label(for = 'related_work') Related to that, I later read that:
+      %textarea#related_work.element.textarea(name = 'related_work')
+      %small Give reference to any related work you have read.
+    %li
+      %label(for = 'experience') It reminded me of a project I worked on before where:
+      %textarea#experience.element.textarea(name = 'experience')
+      %small Provide any related experience you had in the past.
+    %li
+      %label(for = 'tutorial') In the tutorial exercise we:
+      %textarea#tutorial.element.textarea(name = 'tutorial')
+      %small What were the goals of the tutorial?
+    %li
+      %label(for = 'challenges') The main challenge was that:
+      %textarea#challenges.element.textarea(name = 'challenges')
+      %small Which part of the tutorial you found most challenging?
+    %li
+      %label(for = 'solution') To overcome this, we:
+      %textarea#solution.element.textarea(name = 'solution')
+      %small How did you overcome the challenge?
+    %li
+      %label(for = 'feedback') Feedback on the lecture/excercise:
+      %textarea#feedback.element.textarea(name = 'feedback')
+      %small Interesting? Useful? Could be improved? How?
+    %li.buttons
+      %input(name = 'form_id' type = 'hidden' value="#{@form_id}")
+      %input#save.button(name = 'Submit' type = 'submit')
+%footer
+  Department of Computing, Imperial College London

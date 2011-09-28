@@ -1,0 +1,19 @@
+!!! 5
+%html{:lang => 'en'}
+  %head
+    %meta{:charset => 'utf-8'}
+    %title Feedback Form
+    %link{:rel => 'stylesheet', :href => '/feedback_form.css'}
+    %script{:src => '/jquery.js'}
+    %script{:src => '/jquery.validate.js'}
+    %script{:src => '/feedback_form.js'}
+    /[if lt IE 9]
+      %script{:src => 'http://html5shiv.googlecode.com/svn/trunk/html5.js'}
+  %body
+    %header
+      %h1
+        %a Feedback Form
+    %article#container
+      %form{:method => 'post', :enctype => "multipart/form-data"}
+        = partial :form
+    %footer
