@@ -1,8 +1,9 @@
-source :rubygems.org
+source :rubygems
 
 gem 'sinatra', :git => 'git://github.com/sinatra/sinatra.git'
 
 gem 'haml'
 gem 'sass'
 
-gem 'maruku'
+gem 'redcarpet'
+gem 'pdfkit'
