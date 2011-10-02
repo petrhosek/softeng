@@ -29,12 +29,11 @@ end
 
 helpers do
  def build_pdf(name, content)
-    puts content
     markdown = Redcarpet.new(content)
     html = markdown.to_html
 
     kit = PDFKit.new(html)
-    kit.stylesheets << "#{settings.public}/style.css"
+    kit.stylesheets << File.join(settings.root, 'public', 'style.css').to_s
     kit.to_pdf
   end
 end
