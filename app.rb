@@ -1,7 +1,6 @@
 $: << File.dirname(__FILE__)
 
 require 'rubygems'
-#require 'bundler/setup'
 require 'sinatra'
 
 require 'lib/basic_auth'
@@ -15,26 +14,28 @@ require 'digest/sha1'
 require 'ostruct'
 require 'erb'
 
-require 'tempfile'
-require 'maruku'
+require 'redcarpet'
+require 'pdfkit'
 
+set :root, File.dirname(__FILE__)
 set :scss, :style => :compact
-set :show_exceptions, false
+
+configure do
+  PDFKit.configure do |config|
+    config.wkhtmltopdf = File.join(settings.root, 'bin', 'wkhtmltopdf-amd64').to_s
+    config.default_options = { :print_media_type => true }
+  end
+end
 
 helpers do
-  def build_pdf(name, content)
-    document = Maruku.new(content)
-    latex = document.to_latex_document
+ def build_pdf(name, content)
+    puts content
+    markdown = Redcarpet.new(content)
+    html = markdown.to_html
 
-    Dir.mktmpdir('form') do |dir|
-      # Construct document
-      File.open("#{dir}/#{name}.tex", 'w+') { |file| file << latex }
-
-      # Build up document
-      2.times { system "pdflatex -output-directory #{dir} #{dir}/#{name}.tex" }
-
-      [File.read("#{dir}/#{name}.pdf"), File.size("#{dir}/#{name}.pdf")]
-    end
+    kit = PDFKit.new(html)
+    kit.stylesheets << "#{settings.public}/style.css"
+    kit.to_pdf
   end
 end
 
@@ -53,10 +54,10 @@ post '/feedback-form/?', :provides => 'application/pdf' do
 
   # Build the form
   name = "form-#{params[:form_id]}"
-  content, length = build_pdf(name, form)
+  content = build_pdf(name, form)
 
   # Return to the user
-  response['Content-Length'] = length
+  response['Content-Length'] = content.length
   attachment "#{name}.pdf"
 
   content
