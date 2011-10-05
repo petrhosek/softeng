@@ -38,16 +38,16 @@ helpers do
   end
 end
 
-get '/feedback_form.css' do
-  scss :feedback_form
+get '/course_diary.css' do
+  scss :course_diary
 end
 
-get '/feedback-form/?', :provides => 'html' do
+get '/course-diary/?', :provides => 'html' do
   @form_id = Digest::SHA1.hexdigest("#{Time.now}")[0,8]
-  haml :feedback_form
+  haml :course_diary
 end
 
-post '/feedback-form/?', :provides => 'application/pdf' do
+post '/course-diary/?', :provides => 'application/pdf' do
   template = ERB.new File.new('views/_form.md.erb').read
   form = template.result(OpenStruct.new(params).instance_eval { binding })
 

@@ -2,17 +2,17 @@
 %html{:lang => 'en'}
   %head
     %meta{:charset => 'utf-8'}
-    %title Feedback Form
-    %link{:rel => 'stylesheet', :href => '/feedback_form.css'}
+    %title Course Diary
+    %link{:rel => 'stylesheet', :href => '/course_diary.css'}
     %script{:src => '/jquery.js'}
     %script{:src => '/jquery.validate.js'}
-    %script{:src => '/feedback_form.js'}
+    %script{:src => '/course_diary.js'}
     /[if lt IE 9]
       %script{:src => 'http://html5shiv.googlecode.com/svn/trunk/html5.js'}
   %body
     %header
       %h1
-        %a Feedback Form
+        %a Course Diary
     %article#container
       %form{:method => 'post', :enctype => "multipart/form-data"}
         = partial :form
