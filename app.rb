@@ -21,6 +21,7 @@ require 'twitter'
 
 set :root, File.dirname(__FILE__)
 set :scss, :style => :compact
+set :hashtag, "doc475"
 
 configure do
   PDFKit.configure do |config|
@@ -32,7 +33,7 @@ end
 helpers do
   def tweets(tag, page)
     search = Twitter::Search.new
-    search.hashtag(tag)
+    search.hashtag(tag).page(page)
     return search.fetch, search
   end
 
@@ -80,7 +81,7 @@ end
 
 get '/notes', :provides => 'html' do
   page = params[:page].nil? ? 1 : params[:page].to_i
-  @tweets, search = tweets("doc302", page)
+  @tweets, search = tweets(settings.hashtag, page)
 
   @previous = page - 1 if page > 1
   @next = page + 1 if search.next_page?
@@ -92,7 +93,7 @@ end
 post '/notes', :provides => 'application/pdf' do
   # Build the notes
   page = params[:page].nil? ? 1 : params[:page].to_i
-  tweets, search = tweets("doc302", page)
+  tweets, search = tweets(settings.hashtag, page)
   text = template('views/_notes.md.erb', { :tweets => tweets })
 
   # Return to the user
