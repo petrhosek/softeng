@@ -7,3 +7,5 @@ gem 'sass'
 
 gem 'redcarpet'
 gem 'pdfkit'
+
+gem 'twitter'

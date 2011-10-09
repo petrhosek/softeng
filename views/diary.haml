@@ -1,0 +1,74 @@
+%form{:method => 'post', :enctype => "multipart/form-data"}
+  %header.page-header
+    %h1 Course Diary
+    %p Please provide your feedback on the lecture and tutorial
+  %section.row
+    %fieldset.span14
+      %legend Student details
+      .clearfix
+        %label(for = 'fullname') Name:
+        .input
+          %input#fullname.xlarge.required(name = 'fullname' type = 'text')
+          %span.help-inline Your first and last name(s)
+      .clearfix
+        %label(for = 'username') Username:
+        .input
+          %input#username.xlarge.required(name = 'username' type = 'text')
+          %span.help-inline Your CATE username
+      .clearfix
+        %label(for = 'class_name') Class:
+        .input
+          %input#class_name.xlarge.required(name = 'class_name' type = 'text')
+          %span.help-inline The class code or name
+      .clearfix
+        %label(for = 'lecture_title') Lecture title:
+        .input
+          %input#lecture_title.xlarge.required(name = 'lecture_title' type = 'text')
+          %span.help-inline The official lecture title
+    %fieldset.form-stacked
+      .clearfix
+        %label(for = 'key_points') The three key points from the lecture were:
+        %div.input
+          %textarea#key_points.span14(name = 'key_points')~ "*\n*\n*"
+          %span.help-block What were key points made in the lecture?
+      .clearfix
+        %label(for = 'related_work') Related to that, I later read that:
+        .input
+          %textarea#related_work.span14(name = 'related_work')
+          %span.help-block Give reference to any related work you have read.
+      .clearfix
+        %label(for = 'experience') It reminded me of a project I worked on before where:
+        .input
+          %textarea#experience.span14(name = 'experience')
+          %span.help-block Provide any related experience you had in the past.
+      .clearfix
+        %label(for = 'tutorial') In the tutorial exercise we:
+        .input
+          %textarea#tutorial.span14(name = 'tutorial')
+          %span.help-block What were the goals of the tutorial?
+      .clearfix
+        %label(for = 'challenges') The main challenge was that:
+        .input
+          %textarea#challenges.span14(name = 'challenges')
+          %span.help-block Which part of the tutorial you found most challenging?
+      .clearfix
+        %label(for = 'solution') To overcome this, we:
+        .input
+          %textarea#solution.span14(name = 'solution')
+          %span.help-block How did you overcome the challenge?
+      .clearfix
+        %label(for = 'feedback') Feedback on the lecture/excercise:
+        .input
+          %textarea#feedback.span14(name = 'feedback')
+          %span.help-block Interesting? Useful? Could be improved? How?
+      .well
+        %input(name = 'form_id' type = 'hidden' value="#{@form_id}")
+        %input#save.btn.primary(name = 'Submit' type = 'submit')
+        %input#save.btn(name = 'Reset' type = 'reset')
+  %footer
+    %p
+      %span.label.notice Notice
+      %small
+        Content is parsed with
+        %a(href = 'http://github.github.com/github-flavored-markdown/') GitHub Flavored Markdown
+        to allow output formating

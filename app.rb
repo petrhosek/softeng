@@ -17,6 +17,8 @@ require 'erb'
 require 'redcarpet'
 require 'pdfkit'
 
+require 'twitter'
+
 set :root, File.dirname(__FILE__)
 set :scss, :style => :compact
 
@@ -28,38 +30,86 @@ configure do
 end
 
 helpers do
- def build_pdf(name, content)
+  def tweets(tag, page)
+    search = Twitter::Search.new
+    search.hashtag(tag)
+    return search.fetch, search
+  end
+
+  def template(name, data)
+    template = ERB.new File.new(name).read
+    template.result(OpenStruct.new(data).instance_eval { binding })
+  end
+
+  def to_pdf(content)
     markdown = Redcarpet.new(content)
     html = markdown.to_html
 
     kit = PDFKit.new(html)
-    kit.stylesheets << File.join(settings.root, 'public', 'style.css').to_s
-    kit.to_pdf
+    kit.stylesheets << File.join(settings.root, 'public', 'pdf.css').to_s
+    pdf = kit.to_pdf
+  end
+
+  def attach(name, content)
+    response['Content-Length'] = content.length
+    attachment name
+    content
+  end
+
+  def shorten(string, count = 40)
+		shortened = string[0, count]
+    shortened += '...' if string.length > count
+    shortened
+  end
+
+  def urlize(text)
+    text.gsub!(URI.regexp('http')) { |m| "<a href='#{m}'>#{shorten(Twitter.resolve(m)[m])}</a>" }
+    text.gsub!(/@(\w+)/, "<a href='https://twitter.com/\\1'>@\\1</a>")
+    text.gsub!(/#(\w+)/, "<a href='https://twitter.com/#!/search/%23\\1'>\#\\1</a>")
+    text
   end
 end
 
-get '/course_diary.css' do
-  scss :course_diary
+get '/style.css' do
+  scss :style
 end
 
-get '/course-diary/?', :provides => 'html' do
+get '/' do
+  haml :index
+end
+
+get '/notes', :provides => 'html' do
+  page = params[:page].nil? ? 1 : params[:page].to_i
+  @tweets, search = tweets("doc302", page)
+
+  @previous = page - 1 if page > 1
+  @next = page + 1 if search.next_page?
+
   @form_id = Digest::SHA1.hexdigest("#{Time.now}")[0,8]
-  haml :course_diary
+  haml :notes
 end
 
-post '/course-diary/?', :provides => 'application/pdf' do
-  template = ERB.new File.new('views/_form.md.erb').read
-  form = template.result(OpenStruct.new(params).instance_eval { binding })
-
-  # Build the form
-  name = "form-#{params[:form_id]}"
-  content = build_pdf(name, form)
+post '/notes', :provides => 'application/pdf' do
+  # Build the notes
+  page = params[:page].nil? ? 1 : params[:page].to_i
+  tweets, search = tweets("doc302", page)
+  text = template('views/_notes.md.erb', { :tweets => tweets })
 
   # Return to the user
-  response['Content-Length'] = content.length
-  attachment "#{name}.pdf"
+  attach("notes-#{params[:form_id]}.pdf", to_pdf(text))
+end
 
-  content
+get '/diary/?', :provides => 'html' do
+  @form_id = Digest::SHA1.hexdigest("#{Time.now}")[0,8]
+  haml :diary
+end
+
+post '/diary/?', :provides => 'application/pdf' do
+  # Build the diary
+  text = template('views/_diary.md.erb', params)
+
+  # Return to the user
+  attach("diary-#{params[:form_id]}.pdf", to_pdf(text))
 end
 
 error do

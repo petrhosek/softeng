@@ -1,0 +1,35 @@
+%form{:method => 'post', :enctype => "multipart/form-data"}
+  %header.page-header
+    %h1 Course Notes
+    %p
+      Published by you on Twitter
+  %section
+    %div#notes
+      - @tweets.each do |t|
+        %p
+          = urlize t.text
+          %a(href = "https://twitter.com/#{t.from_user}")= "@#{t.from_user}"
+    %nav.pagination
+      %ul
+        - if @previous
+          %li.prev
+            %a(href = "?page=#{@previous}") &larr; Previous
+        - else
+          %li.prev.disabled
+            %a &larr; Previous
+        - if @next
+          %li.next
+            %a(href = "?page=#{@next}") Next &rarr;
+        - else
+          %li.next.disabled
+            %a Next &rarr;
+    .well
+      %input(name = 'form_id' type = 'hidden' value="#{@form_id}")
+      %input#save.btn.success(type = 'submit' value='Export')
+  %footer
+    %p
+      %span.label.important Important
+      %small
+        Use
+        %a(href = 'http://twitter.com/#!/search/%23doc475')= '#doc475'
+        tag to publish your own notes on Twitter

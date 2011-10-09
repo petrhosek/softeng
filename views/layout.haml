@@ -4,23 +4,25 @@
     %meta{:charset => 'utf-8'}
     %title Course Diary
     %link{:rel => 'stylesheet', :href => '/bootstrap.css'}
-    %link{:rel => 'stylesheet', :href => '/course_diary.css'}
+    %link{:rel => 'stylesheet', :href => '/style.css'}
     %script{:src => '/jquery.js'}
     %script{:src => '/jquery.validate.js'}
-    %script{:src => '/course_diary.js'}
+    %script{:src => '/script.js'}
     /[if lt IE 9]
       %script{:src => 'http://html5shiv.googlecode.com/svn/trunk/html5.js'}
   %body
     %header.topbar
       .fill
         .container
-          %a(class = 'brand' href = '#') Software Engineering
+          %a(class = 'brand' href = "#{url '/'}") Software Engineering
           %ul.nav
             %li
-              %a(href = '/course-diary') Diary
+              %a(href = "#{url '/notes'}") Notes
+            %li
+              %a(href = "#{url '/diary'}") Diary
     %article.container
-      %form.content{:method => 'post', :enctype => "multipart/form-data"}
-        = partial :form
+      %div.content
+        = yield
       %footer
         %p
           %small &copy; Department of Computing, Imperial College London 2011
