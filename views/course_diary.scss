@@ -1,232 +1,49 @@
+/* Override some defaults */
+html, body {
+  background-color: #eee;
+}
 body {
-	background: #fff;
-	border: 1px solid #ccc;
-	font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-	font-size: small;
-  margin: 1em auto;
-  width: 760px;
+  padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+}
+.container > footer p {
+  text-align: center; /* center align it with the container */
+}
+.container {
+  width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 }
 
-body > header {
-  display: block;
-  margin: 0 0 1em;
-	text-align: center;
-  h1 {
-	  background-color: #dedede;
-	  margin: 0;
-	  padding: 0;
-    a {
-	    display: block;
-	    height: 100%;
-      padding: 0.5em 0;
-	    text-decoration: none;
-    }
-  }
+/* The white background content wrapper */
+.content {
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+          box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
-article {
-	background: #fff;
-	margin: 0;
-  padding: 0;
-	text-align: left;
+/* Page header tweaks */
+.page-header {
+  background-color: #f5f5f5;
+  padding: 20px 20px 10px;
+  margin: -20px -20px 20px;
 }
 
-body > footer {
-  clear: both;
-  display: block;
-  color: #999;
-  font-size: 85%;
-  padding: 0 0 1em 0;
-  text-align: center;
+/* Styles you shouldn't keep as they are for displaying this base example only */
+.content .span10,
+.content .span4 {
+  min-height: 500px;
+}
+/* Give a quick and non-cross-browser friendly divider */
+.content .span4 {
+  margin-left: 0;
+  padding-left: 19px;
+  border-left: 1px solid #eee;
 }
 
-/**** Form Section ****/
-
-form {
-  font-family: Lucida Grande, Tahoma, Arial, Verdana, sans-serif;
-	font-size: small;
-	margin: 1em 1em 0;
-  .error {
-    clear: both;
-    color: red;
-    font-weight: bold;
-    margin: 0 0 5px;
-  }
-}
-
-form > header {
-	border-bottom: 1px dotted #ccc;
-	clear: both;
-	display: block;
-	margin: 0 0 1em;
-  h2 {
-    clear:left;
-    font-size: 160%;
-    font-weight: 400;
-    margin: 0 0 3px;
-  }
-  p {
-    font-size: 95%;
-    line-height: 130%;
-    margin:0 0 1em;
-  }
-}
-
-
-form > footer {
-	clear: both;
-	color: #999;
-	text-align: center;
-	font-size: 85%;
-  padding: 1em 0 0;
-  a {
-	  color: #999;
-	  text-decoration: none;
-	  border-bottom: 1px dotted #999999;
-  }
-}
-
-section {
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    li {
-      display: block;
-      margin: 0 auto;
-      padding: 5px 10px;
-      position: relative;
-      &:first {
-        border-top: none !important;
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-      }
-      &.section_break {
-        border-top: 1px dotted #ccc;
-        margin: 1em 0 0 0;
-        padding: 1em 0 0 0;
-        width: 100% !important;
-        h3 {
-          font-size: 110%;
-          font-weight: bold;
-          line-height: 130%;
-          margin: 0 0 2px;
-        }
-        p {
-          font-size: 85%;
-          margin: 0 0 10px;
-        }
-      }
-      &.highlighted {
-        background-color: #f5f5f5;
-      }
-      &:hover small {
-        visibility: visible;
-      }
-    }
-    small {
-      background: #f5f5f5;
-      border: 1px solid #e6e6e6;
-      color: #444;
-      font-size: 80%;
-      left: 100%;
-      line-height: 130%;
-      margin: 0 0 0 28px;
-      padding: 10px;
-      position: absolute;
-      top: 0;
-      visibility: hidden;
-      width: 25%;
-      z-index: 1000;
-    }
-  }
-}
-
-/**** Form Elements ****/
-
-label {
-  clear: both;
-  color: #222;
-  display: block;
-  font-size: 95%;
-  font-weight: bold;
-  line-height: 150%;
-  margin: 0 4px 0 0;
-  padding: 0 0 1px;
-  .choice {
-  	color: #444;
-	  display: block;
-	  font-size: 100%;
-	  line-height: 1.4em;
-	  margin: -1.55em 0 0 25px;
-	  padding: 4px 0 5px;
-	  width: 90%;
-  }
-}
-
-input {
-  &.text {
-    border: 1px solid #ddd;
-    color: #333;
-    font-size: 100%;
-    margin: 0;
-    padding: 2px 0;
-    width: 50%;
-  }
-  &.file {
-    color: #333;
-    font-size: 100%;
-    margin: 0;
-    padding: 2px 0;
-  }
-  &.checkbox {
-    display: block;
-    height: 13px;
-    line-height: 1.4em;
-    margin: 6px 0 0 3px;
-    width: 13px;
-  }
-  &.radio {
-    display: block;
-    height: 13px;
-    line-height: 1.4em;
-    margin: 6px 0 0 3px;
-    width: 13px;
-  }
-  &.button {
-    font-size: 120%;
-    margin: 0;
-  }
-}
-
-textarea.textarea {
-	border: 1px solid #ddd;
-	color: #333;
-	font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-  height: 10em;
-	margin: 0;
-	width: 99%;
-}
-
-select.select {
-  border: 1px solid #ddd;
-	color: #333;
-	font-size: 100%;
-	margin: 1px 0;
-	padding: 1px 0 0;
-}
-
-.buttons {
-	clear: both;
-	display: block;
-	margin-top: 10px;
-}
-
-/**** Errors ****/
-
-input.error, textarea.error, select.error {
-    background-color: #ffdfdf !important;
-	  border: 1px solid #EACBCC;
-	  margin: 3px 0;
+.topbar .btn {
+  border: 0;
 }

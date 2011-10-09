@@ -1,58 +1,74 @@
-%header
-  %h2 475 Advanced Topics in Software Engineering
+%header.page-header
+  %h1 Course Diary
   %p Please provide your feedback on the lecture and tutorial
-%section
-  %ul
-    %li
+%section.row
+  %fieldset
+    %legend Student details
+    .clearfix
       %label(for = 'fullname') Name:
-      %input#fullname.element.text.required(name = 'fullname' type = 'text')
-      %small Your first and last name(s)
-    %li
+      .input
+        %input#fullname.xlarge.required(name = 'fullname' type = 'text')
+        %span.help-inline Your first and last name(s)
+    .clearfix
       %label(for = 'username') Username:
-      %input#username.element.text.required(name = 'username' type = 'text')
-      %small Your CATE username
-    %li
+      .input
+        %input#username.xlarge.required(name = 'username' type = 'text')
+        %span.help-inline Your CATE username
+    .clearfix
       %label(for = 'class_name') Class:
-      %input#class_name.element.text.required(name = 'class_name' type = 'text')
-      %small The class code or name
-    %li
+      .input
+        %input#class_name.xlarge.required(name = 'class_name' type = 'text')
+        %span.help-inline The class code or name
+    .clearfix
       %label(for = 'lecture_title') Lecture title:
-      %input#lecture_title.element.text.required(name = 'lecture_title' type = 'text')
-      %small The official lecture title
-    %li.section_break
-      %p
-        Content is parsed with
-        %a(href = 'http://github.github.com/github-flavored-markdown/') GitHub Flavored Markdown
-    %li
+      .input
+        %input#lecture_title.xlarge.required(name = 'lecture_title' type = 'text')
+        %span.help-inline The official lecture title
+  %fieldset.form-stacked.section_break
+    .clearfix
       %label(for = 'key_points') The three key points from the lecture were:
-      %textarea#key_points.element.textarea(name = 'key_points')~ "*\n*\n*"
-      %small What were key points made in the lecture?
-    %li
+      %div.input
+        %textarea#key_points.span14(name = 'key_points')~ "*\n*\n*"
+        %span.help-block What were key points made in the lecture?
+    .clearfix
       %label(for = 'related_work') Related to that, I later read that:
-      %textarea#related_work.element.textarea(name = 'related_work')
-      %small Give reference to any related work you have read.
-    %li
+      .input
+        %textarea#related_work.span14(name = 'related_work')
+        %span.help-block Give reference to any related work you have read.
+    .clearfix
       %label(for = 'experience') It reminded me of a project I worked on before where:
-      %textarea#experience.element.textarea(name = 'experience')
-      %small Provide any related experience you had in the past.
-    %li
+      .input
+        %textarea#experience.span14(name = 'experience')
+        %span.help-block Provide any related experience you had in the past.
+    .clearfix
       %label(for = 'tutorial') In the tutorial exercise we:
-      %textarea#tutorial.element.textarea(name = 'tutorial')
-      %small What were the goals of the tutorial?
-    %li
+      .input
+        %textarea#tutorial.span14(name = 'tutorial')
+        %span.help-block What were the goals of the tutorial?
+    .clearfix
       %label(for = 'challenges') The main challenge was that:
-      %textarea#challenges.element.textarea(name = 'challenges')
-      %small Which part of the tutorial you found most challenging?
-    %li
+      .input
+        %textarea#challenges.span14(name = 'challenges')
+        %span.help-block Which part of the tutorial you found most challenging?
+    .clearfix
       %label(for = 'solution') To overcome this, we:
-      %textarea#solution.element.textarea(name = 'solution')
-      %small How did you overcome the challenge?
-    %li
+      .input
+        %textarea#solution.span14(name = 'solution')
+        %span.help-block How did you overcome the challenge?
+    .clearfix
       %label(for = 'feedback') Feedback on the lecture/excercise:
-      %textarea#feedback.element.textarea(name = 'feedback')
-      %small Interesting? Useful? Could be improved? How?
-    %li.buttons
+      .input
+        %textarea#feedback.span14(name = 'feedback')
+        %span.help-block Interesting? Useful? Could be improved? How?
+    .well
       %input(name = 'form_id' type = 'hidden' value="#{@form_id}")
-      %input#save.button(name = 'Submit' type = 'submit')
+      %input#save.btn.primary(name = 'Submit' type = 'submit')
+      %input#save.btn(name = 'Reset' type = 'reset')
 %footer
-  Department of Computing, Imperial College London
+  %p
+    %span.label.notice Notice
+    %small
+      Content is parsed with
+      %a(href = 'http://github.github.com/github-flavored-markdown/') GitHub Flavored Markdown
+      to allow output formating
+
