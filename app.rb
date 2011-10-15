@@ -64,7 +64,10 @@ helpers do
   end
 
   def urlize(text)
-    text.gsub!(URI.regexp('http')) { |m| "<a href='#{m}'>#{shorten(Twitter.resolve(m)[m])}</a>" }
+    text.gsub!(URI.regexp('http')) { |m|
+      url = Twitter.resolve(m)
+      "<a href='#{m}'>#{url.nil? ? m : url[m]}</a>"
+    }
     text.gsub!(/@(\w+)/, "<a href='https://twitter.com/\\1'>@\\1</a>")
     text.gsub!(/#(\w+)/, "<a href='https://twitter.com/#!/search/%23\\1'>\#\\1</a>")
     text
